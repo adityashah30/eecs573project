@@ -1,0 +1,20 @@
+TODO
+====
+Term Project (EECS 573)
+-----------------------
+
+Aim
+===
+This project aims to create a Natural Language Model such as to extract
+information from processor errata documents published by ARM and Intel. Due to
+dearth of information from Intel, we'll be focusing initially on ARM.
+
+Roadmap
+=======
+The first step is to extract structured data from the PDFs. Unfortunately due to
+differences in document structures, this laborious task will have to be done by
+hand. A csv file containing the structured data will be created as the end
+result of this data extraction effort.
+
+Once data + metadata has been extracted, the next step is to generate a NL model
+which supports inferencing. 
