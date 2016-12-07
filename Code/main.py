@@ -1,6 +1,6 @@
 import sys
 from datahandler import DataHandler
-from model_lda import LDAModel, LDAModelSklearn, LSIModelSklearn
+from models import LDAModel, LDAModelSklearn, LSIModelSklearn
 from visualizer import Visualizer
 
 def load_data(fname):
@@ -39,8 +39,8 @@ def main():
     # lda_model = build_lda_model(data, "Summary", 10)
     # print lda_model.get_model_topics()
     # visualize_data(data, "Summary", 3)
-    # build_lda_model_sklearn(data, "Summary", 3)
-    build_lsi_model_sklearn(data, "Summary", 3)
+    build_lda_model_sklearn(data, "Summary", 3)
+    # build_lsi_model_sklearn(data, "Summary", 3)
 
 
 if __name__ == "__main__":

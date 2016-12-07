@@ -62,7 +62,7 @@ class LSIModelSklearn:
         self.lsi_model = TruncatedSVD(num_topics)
 
     def fit_transform(self):
-        vectorizer = CountVectorizer(stop_words=CorpusConverter.stopwords)
+        vectorizer = TfidfVectorizer(stop_words=CorpusConverter.stopwords)
         matrix_vectorized = vectorizer.fit_transform(self.sentences)
         return self.lsi_model.fit_transform(matrix_vectorized)
 
