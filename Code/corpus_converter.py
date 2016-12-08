@@ -14,7 +14,7 @@ class CorpusConverter:
     def tokenize(self, sentences):
         return map(lambda sent: filter(lambda tok:
                                        tok not in CorpusConverter.stopwords,
-                                      word_tokenize(sent.lower())) , sentences)
+                                      word_tokenize(sent.lower())), sentences)
 
     def convert(self, sentences):
         tokens = self.tokenize(sentences)

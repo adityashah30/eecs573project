@@ -1,25 +1,34 @@
+import os
+import matplotlib.pylab as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+from corpus_converter import CorpusConverter
+
 class Visualizer:
 
-    def __init__(self, sentences=None, num_dimensions=3, plot=False):
-        self.sentences = sentences
-        self.tokens = _CorpusConverter().tokenize(self.sentences)
-        self.num_dimensions = num_dimensions
-        self.plot = plot
+    def __init__(self):
+        pass
 
-    def visualize(self):
-        corpus_converter = _CorpusConverter()
-        vectorizer = TfidfVectorizer(stop_words=corpus_converter.stopwords)
-        matrix_vectorized = vectorizer.fit_transform(self.sentences).toarray()
-        tsne = TSNE(self.num_dimensions)
-        matrix_reduced = tsne.fit_transform(matrix_vectorized)
-        if self.num_dimensions == 2:
-            plt.scatter(matrix_reduced[:,0], matrix_reduced[:,1])
-        elif self.num_dimensions == 3:
+    def visualize(self, sentences, n_dimensions=2, plot_=False):
+        vectorizer = TfidfVectorizer(stop_words=CorpusConverter.stopwords)
+        matrix_vectorized = vectorizer.fit_transform(sentences).toarray()
+        dim_reducer = TSNE(self.n_dimensions)
+        matrix_reduced = dim_reducer.fit_transform(matrix_vectorized)
+        self.plot(matrix_reduced, dim_reducer.__class__.__name__, 
+                  n_dimensions, plot_)
+
+    def plot(self, matrix, model_name, n_dimensions=2, plot_=False):
+        if n_dimensions == 2:
+            plt.scatter(matrix[:,0], matrix[:,1])
+        elif n_dimensions == 3:
             fig = plt.figure()
             ax = fig.add_subplot(111, projection='3d')
-            ax.scatter(matrix_reduced[:, 0], matrix_reduced[:, 1], 
-                       matrix_reduced[:, 2])
-        if self.plot:
+            ax.scatter(matrix[:, 0], matrix[:, 1], 
+                       matrix[:, 2])
+        if plot_:
             plt.show()
         else:
-            plt.savefig("Errata-"+str(self.num_dimensions)+"D.png")
+            plot_path = os.path.join("..", "Plots", 
+                                     "Errata-{}-{}D.png".format(model_name, 
+                                                                n_dimensions))
+            plt.savefig(plot_path)
